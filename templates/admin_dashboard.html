@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang Quản Trị</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Quản Trị Viên Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="/">TRANG CHỦ</a></li>
+                <li><a href="/books">SÁCH</a></li>
+                
+                {% if session.get('user_role') == 'Quản trị viên' or session.get('user_role') == 'Thủ thư' %}
+                <li><a href="/members">ĐỘC GIẢ</a></li>
+                {% endif %}
+                
+                <li><a href="/list_borrows">MƯỢN - TRẢ</a></li>
+                
+                {% if session.get('user_role') == 'Quản trị viên' %}
+                <li><a href="/librarians">THỦ THƯ</a></li>
+                <li><a href="/user_management">QUẢN LÝ NGƯỜI DÙNG</a></li>
+                <li><a href="/generate_statistics">THỐNG KÊ</a></li>
+                {% elif session.get('user_role') == 'Thủ thư' %}
+                <li><a href="/librarians">THỦ THƯ</a></li>
+                {% endif %}
+                
+                <li><a href="/logout">ĐĂNG XUẤT</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="library-image">
+        <img src="{{ url_for('static', filename='images/thuvien.jpg') }}" alt="Thư Viện" />
+        <div class="overlay">
+            <h2>Chào mừng quản trị viên đến LIB ONLINE!</h2>
+            
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 Quản Lý Thư Viện</p>
+    </footer>
+</body>
+</html>
